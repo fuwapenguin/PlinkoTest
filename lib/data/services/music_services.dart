@@ -16,10 +16,14 @@ class MusicServices {
 
   Future<List<PlinkoMusic>> getMusic() async {
     List<PlinkoMusic> music = [];
-    List<Map<String, dynamic>> data = await musicMock.getMockMusic();
-    for(Map<String, dynamic> rawSong in data) {
-      music.add(PlinkoMusic.fromJson(rawSong));
+    try {
+      List<Map<String, dynamic>> data = await musicMock.getMockMusic();
+      for(Map<String, dynamic> rawSong in data) {
+        music.add(PlinkoMusic.fromJson(rawSong));
+      }
+      return music;
+    } catch(e) {
+      rethrow;
     }
-    return music;
   }
 }
